@@ -78,6 +78,46 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("CalculatorApp"),
+      ),
+      body: Column(
+        //building basic calculator layout
+        children: [
+          Row(
+            children: [
+              ElevatedButton(onPressed: () => print('+'), child: Text('+')),
+              ElevatedButton(onPressed: () => '-', child: Text('-')),
+              ElevatedButton(onPressed: () => '*', child: Text('*')),
+              ElevatedButton(onPressed: () => '/', child: Text('/'))
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed: () => 7, child: Text('7')),
+              ElevatedButton(onPressed: () => 8, child: Text('8')),
+              ElevatedButton(onPressed: () => 9, child: Text('9')),
+              ElevatedButton(onPressed: () => '=', child: Text('='))
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed: () => 4, child: Text('4')),
+              ElevatedButton(onPressed: () => 5, child: Text('5')),
+              ElevatedButton(onPressed: () => 6, child: Text('6')),
+              ElevatedButton(onPressed: () => 'C', child: Text('C'))
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(onPressed: () => 1, child: Text('1')),
+              ElevatedButton(onPressed: () => 2, child: Text('2')),
+              ElevatedButton(onPressed: () => 3, child: Text('3'))
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
