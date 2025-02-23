@@ -27,7 +27,7 @@ class CalculatorScreen extends StatefulWidget {
 class _CalculatorScreenState extends State<CalculatorScreen> {
   //basic variables
   String _output = "";
-  String _operand = "";
+  String _operator = "";
   double _num1 = 0;
   double _num2 = 0;
 
@@ -39,27 +39,27 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         _output = "";
         _num1 = 0;
         _num2 = 0;
-        _operand = "";
+        _operator = "";
       } else if (value == "=") {
         _num2 = double.tryParse(_output) ??
             0; // when = is pressed push output into numb2 (chaning to double) check if null or not
         // when press = button calculate
-        if (_operand.isNotEmpty) {
-          // as long as there is operand
-          switch (_operand) {
-            case "+": // when operand is +
+        if (_operator.isNotEmpty) {
+          // as long as there is operator
+          switch (_operator) {
+            case "+": // when operator is +
               _output = (_num1 + _num2)
                   .toString(); //add num1 and num2 and convert it to string
               break;
-            case "-": // when operand is -
+            case "-": // when operator is -
               _output = (_num1 - _num2)
                   .toString(); //subtract num1 and num2 and convert it to string
               break;
-            case "*": // when operand is *
+            case "*": // when operator is *
               _output = (_num1 * _num2)
                   .toString(); //add num1 and num2 and convert it to string
               break;
-            case "/": // when operand is +
+            case "/": // when operator is +
               if (_num2 == 0) {
                 _output = "Error";
               } else {
@@ -70,12 +70,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           } // after calculation is done, save the output as numb 1 and set everything else as initial
           _num1 = double.tryParse(_output) ?? 0;
           _num2 = 0;
-          _operand = "";
+          _operator = "";
         }
       } else if (["+", "-", "*", "/"].contains(value)) {
-        // when operand button is pushed save thenm to operand as well as updating num1 and clearing output
+        // when operator button is pushed save thenm to operator as well as updating num1 and clearing output
         _num1 = double.tryParse(_output) ?? 0;
-        _operand = value;
+        _operator = value;
         _output = "";
       } else {
         _output += value;
@@ -97,11 +97,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           children: [
             //output
             Container(
-              child: Text(_output),
+              color: Colors.lightBlue,
+              child: Text(
+                "Output: $_num1 $_operator $_num2",
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+              ),
             ),
             //buttons
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -117,7 +121,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -133,7 +137,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -149,7 +153,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -159,7 +163,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       onPressed: () => calculation('2'), child: Text('2')),
                   ElevatedButton(
                       onPressed: () => calculation('3'), child: Text('3')),
-                  ElevatedButton(onPressed: () {}, child: Text(''))
+                  ElevatedButton(
+                      onPressed: () => calculation('0'), child: Text('0'))
                 ],
               ),
             )
