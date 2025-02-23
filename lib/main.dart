@@ -41,6 +41,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         _num2 = 0;
         _operand = "";
       } else if (value == "=") {
+        _num2 = double.tryParse(_output) ??
+            0; // when = is pressed push output into numb2 (chaning to double) check if null or not
         // when press = button calculate
         if (_operand.isNotEmpty) {
           // as long as there is operand
@@ -59,17 +61,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               break;
             case "/": // when operand is +
               if (_num2 == 0) {
-                "Error";
+                _output = "Error";
               } else {
                 _output = (_num1 / _num2)
                     .toString(); //add num1 and num2 and convert it to string
                 break;
               }
-          }
+          } // after calculation is done, save the output as numb 1 and set everything else as initial
+          _num1 = double.tryParse(_output) ?? 0;
+          _num2 = 0;
+          _operand = "";
         }
       } else if (["+", "-", "*", "/"].contains(value)) {
-        // when operand button is pushed save thenm to operand
+        // when operand button is pushed save thenm to operand as well as updating num1 and clearing output
+        _num1 = double.tryParse(_output) ?? 0;
         _operand = value;
+        _output = "";
       } else {
         _output += value;
       }
@@ -82,41 +89,82 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         title: Text("CalculatorApp"),
       ),
-      body: Column(
-        //building basic calculator layout
-        children: [
-          Row(
-            children: [
-              ElevatedButton(onPressed: () => print('+'), child: Text('+')),
-              ElevatedButton(onPressed: () => '-', child: Text('-')),
-              ElevatedButton(onPressed: () => '*', child: Text('*')),
-              ElevatedButton(onPressed: () => '/', child: Text('/'))
-            ],
-          ),
-          Row(
-            children: [
-              ElevatedButton(onPressed: () => 7, child: Text('7')),
-              ElevatedButton(onPressed: () => 8, child: Text('8')),
-              ElevatedButton(onPressed: () => 9, child: Text('9')),
-              ElevatedButton(onPressed: () => '=', child: Text('='))
-            ],
-          ),
-          Row(
-            children: [
-              ElevatedButton(onPressed: () => 4, child: Text('4')),
-              ElevatedButton(onPressed: () => 5, child: Text('5')),
-              ElevatedButton(onPressed: () => 6, child: Text('6')),
-              ElevatedButton(onPressed: () => 'C', child: Text('C'))
-            ],
-          ),
-          Row(
-            children: [
-              ElevatedButton(onPressed: () => 1, child: Text('1')),
-              ElevatedButton(onPressed: () => 2, child: Text('2')),
-              ElevatedButton(onPressed: () => 3, child: Text('3'))
-            ],
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          //building basic calculator layout
+          children: [
+            //output
+            Container(
+              child: Text(_output),
+            ),
+            //buttons
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () => calculation('+'), child: Text('+')),
+                  ElevatedButton(
+                      onPressed: () => calculation('-'), child: Text('-')),
+                  ElevatedButton(
+                      onPressed: () => calculation('*'), child: Text('*')),
+                  ElevatedButton(
+                      onPressed: () => calculation('/'), child: Text('/'))
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () => calculation('7'), child: Text('7')),
+                  ElevatedButton(
+                      onPressed: () => calculation('8'), child: Text('8')),
+                  ElevatedButton(
+                      onPressed: () => calculation('9'), child: Text('9')),
+                  ElevatedButton(
+                      onPressed: () => calculation('='), child: Text('='))
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () => calculation('4'), child: Text('4')),
+                  ElevatedButton(
+                      onPressed: () => calculation('5'), child: Text('5')),
+                  ElevatedButton(
+                      onPressed: () => calculation('6'), child: Text('6')),
+                  ElevatedButton(
+                      onPressed: () => calculation('C'), child: Text('C'))
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () => calculation('1'), child: Text('1')),
+                  ElevatedButton(
+                      onPressed: () => calculation('2'), child: Text('2')),
+                  ElevatedButton(
+                      onPressed: () => calculation('3'), child: Text('3')),
+                  ElevatedButton(onPressed: () {}, child: Text(''))
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
