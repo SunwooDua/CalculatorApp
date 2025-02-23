@@ -89,86 +89,121 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         title: Text("CalculatorApp"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          //building basic calculator layout
-          children: [
-            //output
-            Container(
-              color: Colors.lightBlue,
-              child: Text(
-                "Output: $_num1 $_operator $_num2",
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            //building basic calculator layout
+            children: [
+              //output
+              Container(
+                //border for display
+                width: 300,
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
+                child: Center(
+                  child: Text(
+                    _operator.isEmpty
+                        ? _output
+                        : '$_num1 $_operator $_output', // where there is no operator only show num1 or 0 and else show all
+                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
-            ),
-            //buttons
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () => calculation('+'), child: Text('+')),
-                  ElevatedButton(
-                      onPressed: () => calculation('-'), child: Text('-')),
-                  ElevatedButton(
-                      onPressed: () => calculation('*'), child: Text('*')),
-                  ElevatedButton(
-                      onPressed: () => calculation('/'), child: Text('/'))
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () => calculation('7'), child: Text('7')),
-                  ElevatedButton(
-                      onPressed: () => calculation('8'), child: Text('8')),
-                  ElevatedButton(
-                      onPressed: () => calculation('9'), child: Text('9')),
-                  ElevatedButton(
-                      onPressed: () => calculation('='), child: Text('='))
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () => calculation('4'), child: Text('4')),
-                  ElevatedButton(
-                      onPressed: () => calculation('5'), child: Text('5')),
-                  ElevatedButton(
-                      onPressed: () => calculation('6'), child: Text('6')),
-                  ElevatedButton(
-                      onPressed: () => calculation('C'), child: Text('C'))
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () => calculation('1'), child: Text('1')),
-                  ElevatedButton(
-                      onPressed: () => calculation('2'), child: Text('2')),
-                  ElevatedButton(
-                      onPressed: () => calculation('3'), child: Text('3')),
-                  ElevatedButton(
-                      onPressed: () => calculation('0'), child: Text('0'))
-                ],
-              ),
-            )
-          ],
+              //buttons
+              Container(
+                //border for buttons
+                width: 300,
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () => calculation('+'),
+                              child: Text('+')),
+                          ElevatedButton(
+                              onPressed: () => calculation('-'),
+                              child: Text('-')),
+                          ElevatedButton(
+                              onPressed: () => calculation('*'),
+                              child: Text('*')),
+                          ElevatedButton(
+                              onPressed: () => calculation('/'),
+                              child: Text('/'))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () => calculation('7'),
+                              child: Text('7')),
+                          ElevatedButton(
+                              onPressed: () => calculation('8'),
+                              child: Text('8')),
+                          ElevatedButton(
+                              onPressed: () => calculation('9'),
+                              child: Text('9')),
+                          ElevatedButton(
+                              onPressed: () => calculation('='),
+                              child: Text('='))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () => calculation('4'),
+                              child: Text('4')),
+                          ElevatedButton(
+                              onPressed: () => calculation('5'),
+                              child: Text('5')),
+                          ElevatedButton(
+                              onPressed: () => calculation('6'),
+                              child: Text('6')),
+                          ElevatedButton(
+                              onPressed: () => calculation('C'),
+                              child: Text('C'))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () => calculation('1'),
+                              child: Text('1')),
+                          ElevatedButton(
+                              onPressed: () => calculation('2'),
+                              child: Text('2')),
+                          ElevatedButton(
+                              onPressed: () => calculation('3'),
+                              child: Text('3')),
+                          ElevatedButton(
+                              onPressed: () => calculation('0'),
+                              child: Text('0'))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
